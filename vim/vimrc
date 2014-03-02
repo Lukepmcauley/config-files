@@ -1,4 +1,4 @@
-""""""""" Vundle stuff""""""""""""""""""""""
+""""" Vundle stuff
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -8,14 +8,26 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
-
-" My Bundles here:
-"
-" original repos on github
-Bundle 'altercation/vim-colors-solarized'
-" Github repos of the user 'vim-scripts'
-" => can omit the username part
+Bundle 'zeis/vim-kolor'
+Bundle 'tpope/vim-fugitive'
 
 filetype plugin indent on     " required!
 
-""""""""end vundle stuff""""""""""""""
+""""end vundle stuff
+
+"""" colorscheme
+syntax enable
+set background=light
+
+""""""" 256 colour in tmux fix
+set t_ut=
+
+""""""" kolor 
+let g:kolor_italic=1                    " Enable italic. Default: 1
+let g:kolor_bold=1                      " Enable bold. Default: 1
+let g:kolor_underlined=0                " Enable underline. Default: 0
+let g:kolor_alternative_matchparen=0    " Gray 'MatchParen' color. Default: 0`
+
+colorscheme kolor
+	
+"""" end  colorscheme
