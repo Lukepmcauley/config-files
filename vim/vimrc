@@ -16,6 +16,7 @@ Plugin 'tpope/vim-fugitive.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'godlygeek/tabular'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -29,6 +30,9 @@ filetype plugin indent on    " required
  vmap <expr>  K        DVB_Drag('up')
  vmap <expr>  H        DVB_Drag('left')
 
+"ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 "=====Search options
 set hlsearch
 set ignorecase
@@ -40,7 +44,8 @@ set pastetoggle=<F2>
 
 """ colorscheme 
 syntax on
-colorscheme wombat
+colorscheme molokai
+set t_Co=256
 
 
 """ Misc
