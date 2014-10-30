@@ -11,19 +11,25 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'jondkinney/dragvisuals.vim'
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'godlygeek/tabular'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'godlygeek/tabular'
+Plugin 'gorkunov/smartpairs.vim'
+Plugin 'jondkinney/dragvisuals.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'tpope/vim-dispatch' 
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 "=======End of Vundle stuff ====
 
-"======Plugin settings ==== 
+"======Plugin settings ====
 "dragvisuals.vim
  vmap <expr>  L        DVB_Drag('right')
  vmap <expr>  J        DVB_Drag('down')
@@ -33,25 +39,42 @@ filetype plugin indent on    " required
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+"vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
 "=====Search options
 set hlsearch
 set ignorecase
 set smartcase
 
-""" Mappings 
-nnoremap <silent> <leader>ch :set hlsearch!<CR> 
+""" Mappings
+nnoremap <silent> <leader>ch :set hlsearch!<CR>
 set pastetoggle=<F2>
+"" Tabularize mappings
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\\zs<CR>
+vmap <Leader>a:: :Tabularize /:\\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
 
-""" colorscheme 
+""" colorscheme
 syntax on
 colorscheme molokai
 set t_Co=256
 
+""" Tab settings
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
+"""copy and paste
+vmap <leader> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 """ Misc
 set wildmenu
 set wildmode=longest:full,full
-set laststatus=3
+set laststatus=2
 set confirm
 set number
+set clipboard+=unnamed
 
