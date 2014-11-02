@@ -17,12 +17,13 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'jondkinney/dragvisuals.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'tpope/vim-dispatch' 
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
+Plugin 'syntastic'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'tpope/vim-dispatch' 
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -49,6 +50,7 @@ set smartcase
 
 """ Mappings
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
+nmap <Leader>f :set fdm=syntax<CR>
 set pastetoggle=<F2>
 "" Tabularize mappings
 nmap <Leader>a= :Tabularize /=<CR>
@@ -59,6 +61,7 @@ nmap <Leader>a:: :Tabularize /:\\zs<CR>
 vmap <Leader>a:: :Tabularize /:\\zs<CR>
 nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
+
 
 """ colorscheme
 syntax on
@@ -77,4 +80,5 @@ set laststatus=2
 set confirm
 set number
 set clipboard+=unnamed
-
+set hidden
+let loaded_matchparen = 1
