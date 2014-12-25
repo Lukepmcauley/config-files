@@ -11,16 +11,17 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'jondkinney/dragvisuals.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'Yggdroot/indentLine'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'syntastic'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'tpope/vim-dispatch' 
@@ -37,31 +38,36 @@ filetype plugin indent on    " required
  vmap <expr>  K        DVB_Drag('up')
  vmap <expr>  H        DVB_Drag('left')
 
+"syntastic
+let g:syntastic_python_pylint_args = '--load-plugins pylint_django' 
+
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
-"=====Search options
-set hlsearch
-set ignorecase
-set smartcase
+let g:airline#extensions#tabline#enabled = 1
 
 """ Mappings
+map <leader>k :bnext<Return>
+map <leader>j :bprev<Return>
+map <leader>d :bd<Return>
+
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
 nmap <Leader>f :set fdm=syntax<CR>
 set pastetoggle=<F2>
 "" Tabularize mappings
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a= :Tabularize /^[^=]*\zs=
+vmap <Leader>a= :Tabularize /^[^=]*\zs=
 nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a: :Tabularize /:<CR>
 nmap <Leader>a:: :Tabularize /:\\zs<CR>
 vmap <Leader>a:: :Tabularize /:\\zs<CR>
 nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
-
+nmap <Leader>ac :Tabularize /\/\/<CR>
+vmap <Leader>ac :Tabularize /\/\/,<CR>
 
 """ colorscheme
 syntax on
@@ -70,15 +76,20 @@ set t_Co=256
 
 """ Tab settings
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+"=====Search options
+set hlsearch
+set ignorecase
+set smartcase
 
-"""copy and paste
-vmap <leader> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 """ Misc
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
 set confirm
+set ruler
 set number
 set clipboard+=unnamed
 set hidden
+set noswapfile
+set nowrap
 let loaded_matchparen = 1
