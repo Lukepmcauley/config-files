@@ -22,6 +22,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'Yggdroot/indentLine'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'jplaut/vim-arduino-ino'
 Plugin 'syntastic'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'tpope/vim-dispatch' 
@@ -48,6 +49,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
+
+" syntastic
+let g:syntastic_mode_map = {"mode":"passive"}
 
 """ Mappings
 map <leader>k :bnext<Return>
