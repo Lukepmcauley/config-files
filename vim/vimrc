@@ -92,7 +92,7 @@ set laststatus=2
 set confirm
 set ruler
 set number
-set clipboard+=unnamed
+set clipboard=unnamedplus
 set hidden
 set noswapfile
 set nowrap
