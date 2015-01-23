@@ -24,8 +24,10 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jplaut/vim-arduino-ino'
 Plugin 'syntastic'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'jason0x43/vim-js-indent'
 "Plugin 'Valloric/YouCompleteMe'
-"Plugin 'tpope/vim-dispatch' 
+Plugin 'tpope/vim-dispatch' 
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -57,6 +59,8 @@ let g:syntastic_mode_map = {"mode":"passive"}
 map <leader>k :bnext<Return>
 map <leader>j :bprev<Return>
 map <leader>d :bd<Return>
+map <leader>m :w<Return>:Make<Return>
+map <leader>. :@<Return>
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
 nmap <Leader>f :set fdm=syntax<CR>
@@ -73,6 +77,10 @@ vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>ac :Tabularize /\/\/<CR>
 vmap <Leader>ac :Tabularize /\/\/,<CR>
 
+"""TypescriptTools
+""au BufRead,BufNewFile *.ts setlocal filetype=typescript
+""set rtp+=/usr/local/lib/node_modules/typescript-tools
+
 """ colorscheme
 syntax on
 colorscheme molokai
@@ -86,6 +94,8 @@ set ignorecase
 set smartcase
 
 """ Misc
+au FileType c,cpp setlocal comments-=:// comments+=f://
+set makeprg=gcc\ -o\ %<\ %
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
@@ -97,3 +107,5 @@ set hidden
 set noswapfile
 set nowrap
 let loaded_matchparen = 1
+"autocmd QuickFixCmdPost [^l]* nested cwindow
+"autocmd QuickFixCmdPost    l* nested lwindow
