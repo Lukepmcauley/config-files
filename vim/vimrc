@@ -12,22 +12,27 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'godlygeek/tabular'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'jondkinney/dragvisuals.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'klen/python-mode'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch' 
+Plugin 'tpope/vim-eunuch' 
 Plugin 'Yggdroot/indentLine'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jplaut/vim-arduino-ino'
-Plugin 'syntastic'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'jason0x43/vim-js-indent'
+Plugin 'sudar/vim-arduino-syntax'
+" Not used atm
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-dispatch' 
+"Plugin 'syntastic'
+"Plugin 'godlygeek/tabular'
+"Plugin 'jondkinney/dragvisuals.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -53,14 +58,19 @@ let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
 " syntastic
-let g:syntastic_mode_map = {"mode":"passive"}
+"let g:syntastic_mode_map = {"mode":"passive"}
+
+"pymode
+let g:pymode_folding = 0
+
 
 """ Mappings
 map <leader>k :bnext<Return>
 map <leader>j :bprev<Return>
 map <leader>d :bd<Return>
-map <leader>m :w<Return>:Make<Return>
 map <leader>. :@<Return>
+map <leader>o zo
+map <leader>O zO
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
 nmap <Leader>f :set fdm=syntax<CR>
@@ -95,7 +105,7 @@ set smartcase
 
 """ Misc
 au FileType c,cpp setlocal comments-=:// comments+=f://
-set makeprg=gcc\ -o\ %<\ %
+""set makeprg=gcc\ -o\ %<\ %
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
