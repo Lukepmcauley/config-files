@@ -20,14 +20,16 @@ Plugin 'klen/python-mode'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch' 
-Plugin 'tpope/vim-eunuch' 
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
 Plugin 'Yggdroot/indentLine'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jplaut/vim-arduino-ino'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'jason0x43/vim-js-indent'
 Plugin 'sudar/vim-arduino-syntax'
+Plugin 'dahu/Insertlessly'
+
 " Not used atm
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'syntastic'
@@ -40,14 +42,10 @@ filetype plugin indent on    " required
 "=======End of Vundle stuff ====
 
 "======Plugin settings ====
-"dragvisuals.vim
- vmap <expr>  L        DVB_Drag('right')
- vmap <expr>  J        DVB_Drag('down')
- vmap <expr>  K        DVB_Drag('up')
- vmap <expr>  H        DVB_Drag('left')
 
 "syntastic
-let g:syntastic_python_pylint_args = '--load-plugins pylint_django' 
+"let g:syntastic_python_pylint_args = '--load-plugins pylint_django'
+"let g:syntastic_mode_map = {"mode":"passive"}
 
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -57,35 +55,40 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
-" syntastic
-"let g:syntastic_mode_map = {"mode":"passive"}
 
 "pymode
 let g:pymode_folding = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_lint_ignore = "E,W"
 
 
 """ Mappings
+
+"""insertlessly fi x
+nmap <leader>o <Plug>OpenNewline
+nmap <leader>s <Plug>InsertSpace
+
+
+"""Cycle buffers
 map <leader>k :bnext<Return>
 map <leader>j :bprev<Return>
+
+""" Delete Buffer
 map <leader>d :bd<Return>
-map <leader>. :@<Return>
-map <leader>o zo
+
+"""Open folds
+"map <leader>o zo
 map <leader>O zO
+nmap <Leader>f :set fdm=syntax<CR>
+""" Resize splits with arrow keys
+noremap <Up> :res -5 <CR>
+noremap <Down> :res +5 <CR>
+noremap <Left> :vertical resize -5<CR>
+noremap <Right> :vertical resize +5<CR>
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
-nmap <Leader>f :set fdm=syntax<CR>
 set pastetoggle=<F2>
-"" Tabularize mappings
-nmap <Leader>a= :Tabularize /^[^=]*\zs=
-vmap <Leader>a= :Tabularize /^[^=]*\zs=
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\\zs<CR>
-vmap <Leader>a:: :Tabularize /:\\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>ac :Tabularize /\/\/<CR>
-vmap <Leader>ac :Tabularize /\/\/,<CR>
+
 
 """TypescriptTools
 ""au BufRead,BufNewFile *.ts setlocal filetype=typescript
@@ -116,6 +119,5 @@ set clipboard=unnamedplus
 set hidden
 set noswapfile
 set nowrap
+set scroll=5
 let loaded_matchparen = 1
-"autocmd QuickFixCmdPost [^l]* nested cwindow
-"autocmd QuickFixCmdPost    l* nested lwindow
