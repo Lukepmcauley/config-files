@@ -19,6 +19,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-vinegar.git'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-eunuch'
@@ -55,6 +56,9 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
+"tmuxline
+let g:tmuxline_preset = 'minimal'
+
 
 "pymode
 let g:pymode_folding = 0
@@ -90,10 +94,6 @@ nnoremap <silent> <leader>ch :set hlsearch!<CR>
 set pastetoggle=<F2>
 
 
-"""TypescriptTools
-""au BufRead,BufNewFile *.ts setlocal filetype=typescript
-""set rtp+=/usr/local/lib/node_modules/typescript-tools
-
 """ colorscheme
 syntax on
 colorscheme molokai
@@ -114,10 +114,13 @@ set wildmode=longest:full,full
 set laststatus=2
 set confirm
 set ruler
-set number
+"""set number
 set clipboard=unnamedplus
 set hidden
 set noswapfile
 set nowrap
+"""set spell spelllang=en_gb
 set scroll=5
 let loaded_matchparen = 1
+
+let g:netrw_list_hide ='.*\.pyc$'
