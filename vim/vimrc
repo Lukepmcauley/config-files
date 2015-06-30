@@ -59,7 +59,7 @@ let g:airline#extensions#tabline#enabled = 1
 "pymode
 let g:pymode_folding = 0
 let g:pymode_rope_complete_on_dot = 0
-let g:pymode_lint_ignore = "E,W"
+""let g:pymode_lint_ignore = "E,W"
 
 
 """ Mappings
@@ -121,3 +121,5 @@ set noswapfile
 set nowrap
 set scroll=5
 let loaded_matchparen = 1
+let g:pymode_rope_autoimport = 0
+let g:pymode_options_max_line_length = 100
