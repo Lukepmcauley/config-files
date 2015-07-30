@@ -17,25 +17,16 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
-Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar.git'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-fugitive.git'
 Plugin 'Yggdroot/indentLine'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'jplaut/vim-arduino-ino'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'jason0x43/vim-js-indent'
-Plugin 'sudar/vim-arduino-syntax'
 Plugin 'dahu/Insertlessly'
-
-" Not used atm
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'syntastic'
-"Plugin 'godlygeek/tabular'
-"Plugin 'jondkinney/dragvisuals.vim'
+Plugin 'Valloric/ListToggle'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,46 +35,44 @@ filetype plugin indent on    " required
 
 "======Plugin settings ====
 
-"syntastic
-"let g:syntastic_python_pylint_args = '--load-plugins pylint_django'
-"let g:syntastic_mode_map = {"mode":"passive"}
-
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 
 "tmuxline
 let g:tmuxline_preset = 'minimal'
 
-
 "pymode
 let g:pymode_folding = 0
 let g:pymode_rope_complete_on_dot = 0
-let g:pymode_lint_ignore = "E,W"
+let g:pep8_ignore="W0401"
+let g:pymode_options_max_line_length = 79
+let g:pymode_lint_cwindow = 1
+let g:pymode_lint_on_fly = 1
 
-
-""" Mappings
-
-"""insertlessly fi x
+"insertlessly
 nmap <leader>o <Plug>OpenNewline
-nmap <leader>s <Plug>InsertSpace
 
+"nerdtree
+map <leader>n :NERDTreeToggle<CR>
 
 """Cycle buffers
-map <leader>k :bnext<Return>
-map <leader>j :bprev<Return>
+map <leader>k :CtrlPBuffer<CR>
 
-""" Delete Buffer
+""" Mappings
+" Delete Buffer
 map <leader>d :bd<Return>
 
-"""Open folds
-"map <leader>o zo
+"Open folds
 map <leader>O zO
 nmap <Leader>f :set fdm=syntax<CR>
+
+map <leader>d "_d
+
 """ Resize splits with arrow keys
 noremap <Up> :res -5 <CR>
 noremap <Down> :res +5 <CR>
@@ -91,7 +80,6 @@ noremap <Left> :vertical resize -5<CR>
 noremap <Right> :vertical resize +5<CR>
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
-set pastetoggle=<F2>
 
 
 """ colorscheme
@@ -105,22 +93,19 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set hlsearch
 set ignorecase
 set smartcase
-
-""" Misc
 au FileType c,cpp setlocal comments-=:// comments+=f://
-""set makeprg=gcc\ -o\ %<\ %
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
 set confirm
+set pastetoggle=<F2>
 set ruler
-"""set number
+set number
 set clipboard=unnamedplus
 set hidden
 set noswapfile
 set nowrap
-"""set spell spelllang=en_gb
+set mouse=a
 set scroll=5
 let loaded_matchparen = 1
-
 let g:netrw_list_hide ='.*\.pyc$'
