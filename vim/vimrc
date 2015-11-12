@@ -27,6 +27,12 @@ Plugin 'dahu/Insertlessly'
 Plugin 'Valloric/ListToggle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/ShowMarks'
+Plugin 'groenewege/vim-less'
+Plugin 'tmhedberg/matchit'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -34,15 +40,20 @@ filetype plugin indent on    " required
 "=======End of Vundle stuff ====
 
 "======Plugin settings ====
-""" syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+""" tagbar
+nmap <F8> :TagbarToggle<CR>
+
+""" syntastic
+set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_pylint_post_args = "--load-plugins=pylint_django --disable=missing-docstring,wildcard-import,W0614"
 
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -62,8 +73,11 @@ let g:pymode_rope_complete_on_dot = 0
 """ Mappings
 let g:pep8_ignore="W0401"
 let g:pymode_options_max_line_length = 79
-let g:pymode_lint_cwindow = 1
-let g:pymode_lint_on_fly = 1
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_on_fly = 0
+
+""" ctrl-p
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|migrations\|generated'
 
 "insertlessly
 nmap <leader>o <Plug>OpenNewline
@@ -71,8 +85,9 @@ nmap <leader>o <Plug>OpenNewline
 "nerdtree
 map <leader>n :NERDTreeToggle<CR>
 
-"""Cycle buffers
+"""change buffers
 map <leader>k :CtrlPBuffer<CR>
+
 
 """ Mappings
 " Delete Buffer
@@ -92,6 +107,7 @@ noremap <Right> :vertical resize +5<CR>
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
 
+""" console.log
 
 """ colorscheme
 syntax on
@@ -118,7 +134,9 @@ set noswapfile
 set nowrap
 set mouse=a
 set scroll=5
-let loaded_matchparen = 1
 let g:pymode_rope_autoimport = 0
 let g:pymode_options_max_line_length = 100
 let g:netrw_list_hide ='.*\.pyc$'
+set wildignore+=*.hi,*.pyc,*.o
+set showmatch
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
