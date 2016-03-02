@@ -11,28 +11,44 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'bling/vim-airline'
+
+"" tmux related
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+
+"" File browsing
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+
+""making things pretty
+Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'kien/ctrlp.vim'
+
+"" Programming checkers
+" Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+
+""misc
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'Yggdroot/indentLine'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dahu/Insertlessly'
-Plugin 'Valloric/ListToggle'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/ShowMarks'
-Plugin 'groenewege/vim-less'
 Plugin 'tmhedberg/matchit'
+
+""language syntax
+Plugin 'groenewege/vim-less'
+Plugin 'jelera/vim-javascript-syntax'
+
+
+" Plugin 'lervag/vimtex'
+" Plugin 'derekwyatt/vim-scala'
+" Plugin 'Valloric/ListToggle'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,20 +56,6 @@ filetype plugin indent on    " required
 "=======End of Vundle stuff ====
 
 "======Plugin settings ====
-
-""" tagbar
-nmap <F8> :TagbarToggle<CR>
-
-""" syntastic
-set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_pylint_post_args = "--load-plugins=pylint_django --disable=missing-docstring,wildcard-import,W0614"
 
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -66,38 +68,16 @@ let g:airline#extensions#tabline#enabled = 0
 "tmuxline
 let g:tmuxline_preset = 'minimal'
 
-"pymode
-let g:pymode_folding = 0
-let g:pymode_rope_complete_on_dot = 0
-
-""" Mappings
-let g:pep8_ignore="W0401"
-let g:pymode_options_max_line_length = 79
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_on_fly = 0
-
 """ ctrl-p
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|migrations\|generated'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|migrations\|generated\'
 
-"insertlessly
-nmap <leader>o <Plug>OpenNewline
+"========Mappings============"
 
-"nerdtree
 map <leader>n :NERDTreeToggle<CR>
-
-"""change buffers
-map <leader>k :CtrlPBuffer<CR>
-
-
-""" Mappings
-" Delete Buffer
-map <leader>d :bd<Return>
-
-"Open folds
-map <leader>O zO
-nmap <Leader>f :set fdm=syntax<CR>
-
 map <leader>d "_d
+nnoremap <silent> <leader>ch :set hlsearch!<CR>
+
+noremap Y y$
 
 """ Resize splits with arrow keys
 noremap <Up> :res -5 <CR>
@@ -105,38 +85,37 @@ noremap <Down> :res +5 <CR>
 noremap <Left> :vertical resize -5<CR>
 noremap <Right> :vertical resize +5<CR>
 
-nnoremap <silent> <leader>ch :set hlsearch!<CR>
+"" Indenting in visual mode
+vmap < <gv
+vmap > >gv
 
-""" console.log
+set pastetoggle=<F12>
+autocmd InsertLeave * set nopaste " disable paste mode on leaving insert mode
 
 """ colorscheme
 syntax on
 colorscheme molokai
 set t_Co=256
 
-""" Tab settings
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 "=====Search options
 set hlsearch
 set ignorecase
 set smartcase
+set incsearch
 au FileType c,cpp setlocal comments-=:// comments+=f://
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
 set confirm
-set pastetoggle=<F2>
-set ruler
 set number
 set clipboard=unnamedplus
 set hidden
 set noswapfile
 set nowrap
+set lazyredraw                        " don't bother updating screen during macro playback
+set nojoinspaces                      " don't autoinsert two spaces after '.', '?', '!' for join command
 set mouse=a
 set scroll=5
-let g:pymode_rope_autoimport = 0
-let g:pymode_options_max_line_length = 100
-let g:netrw_list_hide ='.*\.pyc$'
-set wildignore+=*.hi,*.pyc,*.o
+set wildignore+=*.hi,*.pyc,*.o,*.d
 set showmatch
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
