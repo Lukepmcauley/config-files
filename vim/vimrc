@@ -12,21 +12,26 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'gorkunov/smartpairs.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'tikhomirov/vim-glsl'
 Plugin 'kien/ctrlp.vim'
-Plugin 'klen/python-mode'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-repeat'
+"lugin 'klen/python-mode'
+"lugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'vim-scripts/cscope.vim'
+Plugin 'gorkunov/smartpairs.vim'
 Plugin 'Yggdroot/indentLine'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dahu/Insertlessly'
-Plugin 'Valloric/ListToggle'
+" Plugin 'Valloric/youcompleteme'
 Plugin 'scrooloose/nerdtree'
+Plugin 'the-lambda-church/coquille'
+Plugin 'def-lkb/vimbufsync'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,7 +49,15 @@ let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 0
 
 "tmuxline
-let g:tmuxline_preset = 'minimal'
+let g:tmuxline_preset = {
+        \ 'a': '#S',
+        \ 'win': '#I #W',
+        \ 'cwin': '#I #W',
+	\ 'x': '#(finger on:Edinburgh@graph.no | tail -n 1)',
+        \ 'z': '%R',
+        \ 'options': {
+        \'status-justify': 'left'}
+        \}
 
 "pymode
 let g:pymode_folding = 0
@@ -81,14 +94,28 @@ noremap <Right> :vertical resize +5<CR>
 
 nnoremap <silent> <leader>ch :set hlsearch!<CR>
 
-
+"""cscope
+if has("cscope")
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add database pointed to by environment
+    else
+        cs add ~/gensim/cscope.out
+    endif
+    set csverb
+endif
 """ colorscheme
 syntax on
 colorscheme molokai
 set t_Co=256
 
 """ Tab settings
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=8  shiftwidth=4
 "=====Search options
 set hlsearch
 set ignorecase
@@ -107,5 +134,12 @@ set noswapfile
 set nowrap
 set mouse=a
 set scroll=5
-let loaded_matchparen = 1
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+"let loaded_matchparen = 1
 let g:netrw_list_hide ='.*\.pyc$'
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+set tags=tags;/
+
+" Maps Coquille commands to <F2> (Undo), <F3> (Next), <F4> (ToCursor)
+au FileType coq call coquille#FNMapping()
