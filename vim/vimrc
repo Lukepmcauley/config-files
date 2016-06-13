@@ -11,22 +11,30 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+"Making things look pretty
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'gorkunov/smartpairs.vim'
+
+"Opening and Managing files, tabs and buffers
 Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'Yggdroot/indentLine'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'dahu/Insertlessly'
-Plugin 'Valloric/ListToggle'
 Plugin 'scrooloose/nerdtree'
+
+"Text Manipulation and Selection
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'gorkunov/smartpairs.vim'
+
+"Interacting with the outside world
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive.git'
+
+"Programming Syntax and Highlighting
 Plugin 'scrooloose/syntastic'
+"
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -34,16 +42,21 @@ filetype plugin indent on    " required
 "=======End of Vundle stuff ====
 
 "======Plugin settings ====
-""" syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = "--load-plugins pylint_django"
 "ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -55,22 +68,16 @@ let g:airline#extensions#tabline#enabled = 0
 "tmuxline
 let g:tmuxline_preset = 'minimal'
 
-"pymode
-let g:pymode_folding = 0
-let g:pymode_rope_complete_on_dot = 0
-
-""" Mappings
-let g:pep8_ignore="W0401"
-let g:pymode_options_max_line_length = 79
-let g:pymode_lint_cwindow = 1
-let g:pymode_lint_on_fly = 1
 
 "insertlessly
 nmap <leader>o <Plug>OpenNewline
 
 "nerdtree
+"
 map <leader>n :NERDTreeToggle<CR>
 
+
+""" Mappings
 """Cycle buffers
 map <leader>k :CtrlPBuffer<CR>
 
@@ -98,13 +105,19 @@ syntax on
 colorscheme molokai
 set t_Co=256
 
+"""file type specifics
+au FileType c,cpp setlocal comments-=:// comments+=f://
+let g:netrw_list_hide ='.*\.pyc$'
+
 """ Tab settings
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 "=====Search options
 set hlsearch
 set ignorecase
 set smartcase
-au FileType c,cpp setlocal comments-=:// comments+=f://
+
+"===Everything else
 set wildmenu
 set wildmode=longest:full,full
 set laststatus=2
@@ -119,6 +132,3 @@ set nowrap
 set mouse=a
 set scroll=5
 let loaded_matchparen = 1
-let g:pymode_rope_autoimport = 0
-let g:pymode_options_max_line_length = 100
-let g:netrw_list_hide ='.*\.pyc$'
